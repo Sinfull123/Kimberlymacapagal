@@ -253,10 +253,12 @@
       document.body.classList.add("modal-open"); d.showModal();
     });
   });
-  function close(){ d.close(); }
+  function cleanup(){ f.src="about:blank"; document.body.classList.remove("modal-open"); }
+  function close(){ if(d.open) d.close(); cleanup(); }
   document.getElementById("certClose").addEventListener("click",close);
   d.addEventListener("click",function(e){ if(e.target===d) close(); });
-  d.addEventListener("close",function(){ f.src="about:blank"; document.body.classList.remove("modal-open"); });
+  d.addEventListener("cancel",function(e){ e.preventDefault(); close(); });
+  d.addEventListener("close",cleanup);
 })();
 </script>
 </body>
